@@ -1,1 +1,306 @@
-. 
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IJS — Sitio sencillo</title>
+  <meta name="description" content="Sitio demo con estilo IJS: tipográfico, minimalista y moderno." />
+
+  <!-- Estilos -->
+  <style>
+    /* Variables de diseño (fácil personalizar) */
+    :root{
+      --bg: #0f1724;        /* fondo oscuro */
+      --card: #0b1220;
+      --muted: #99a0b3;
+      --accent: #7dd3fc;    /* acento claro */
+      --accent-2: #60a5fa;
+      --text: #e6eef8;
+      --glass: rgba(255,255,255,0.03);
+      --radius: 14px;
+      --maxw: 1000px;
+      --ff-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --ff-display: "Playfair Display", Georgia, "Times New Roman", serif;
+    }
+
+    /* Reset ligero */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:var(--ff-sans);
+      background:linear-gradient(180deg,var(--bg),#071026 120%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:32px 16px;
+      display:flex;
+      justify-content:center;
+    }
+
+    /* Contenedor central */
+    .wrap{
+      width:100%;
+      max-width:var(--maxw);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:20px;
+      padding:28px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Header / logo */
+    header{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      margin-bottom:20px;
+    }
+    .logo{
+      width:72px;
+      height:72px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:var(--ff-display);
+      font-weight:700;
+      color:#052235;
+      font-size:24px;
+      box-shadow: 0 6px 18px rgba(96,165,250,0.12);
+    }
+    .brand h1{
+      font-family:var(--ff-display);
+      font-size:20px;
+      letter-spacing:0.6px;
+    }
+    .brand p{
+      color:var(--muted);
+      font-size:13px;
+      margin-top:4px;
+    }
+
+    /* Layout: columnas */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      gap:22px;
+    }
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* Card principal */
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:var(--radius);
+      box-shadow: 0 4px 18px rgba(2,6,23,0.6);
+    }
+    .hero-title{
+      font-family:var(--ff-display);
+      font-size:28px;
+      margin-bottom:10px;
+    }
+    .lead{
+      color:var(--muted);
+      margin-bottom:16px;
+    }
+    .features{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+    @media (max-width:520px){ .features{grid-template-columns:1fr} }
+
+    .feature{
+      background:var(--glass);
+      padding:10px;
+      border-radius:10px;
+      font-size:14px;
+    }
+
+    /* Sidebar pequeño */
+    aside .small{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .cta{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#022033;
+      padding:12px;
+      border-radius:12px;
+      font-weight:600;
+      text-align:center;
+      cursor:pointer;
+      user-select:none;
+    }
+    .mutecard{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.04);
+      padding:12px;
+      border-radius:12px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Form sencillo */
+    form input, form textarea{
+      width:100%;
+      padding:10px;
+      margin-top:8px;
+      background:transparent;
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.04);
+      border-radius:8px;
+      outline:none;
+      font-size:14px;
+    }
+    form textarea{ min-height:90px; resize:vertical }
+
+    /* tiny helper */
+    .kbd{
+      background:rgba(255,255,255,0.03);
+      padding:6px 8px;
+      border-radius:8px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* small link */
+    a.link{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header>
+      <div class="logo" aria-hidden="true">IJS</div>
+      <div class="brand">
+        <h1>IJS — Estilo Minimal Tipográfico</h1>
+        <p>Diseño: limpio, centrado en tipografía y contraste. Demo rápida.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Columna principal -->
+      <section class="card" aria-labelledby="home-title">
+        <h2 id="home-title" class="hero-title">Bienvenido al sitio IJS</h2>
+        <p class="lead">Este es un ejemplo de sitio con estilo IJS: enfoque tipográfico, paleta fría y componentes sencillos para presentar contenido de forma elegante.</p>
+
+        <div class="features" aria-hidden="false">
+          <div class="feature">
+            <strong>Tipografía</strong><br /><span class="muted">Encabezados con serif, texto con sans.</span>
+          </div>
+          <div class="feature">
+            <strong>Contraste</strong><br /><span class="muted">Fondo oscuro con acentos claros.</span>
+          </div>
+          <div class="feature">
+            <strong>Layout</strong><br /><span class="muted">Diseño responsivo, columna principal y sidebar.</span>
+          </div>
+          <div class="feature">
+            <strong>Interacción</strong><br /><span class="muted">Pequeños scripts para mejorar UX.</span>
+          </div>
+        </div>
+
+        <hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,0.03)">
+
+        <h3>Contacto</h3>
+        <p class="muted" style="font-size:14px">Envía un mensaje rápido (demo — no se envía a servidor).</p>
+
+        <form id="contactForm" onsubmit="return fauxSend(event)">
+          <label for="name" style="font-size:13px;color:var(--muted)">Nombre</label>
+          <input id="name" type="text" placeholder="Tu nombre" required>
+
+          <label for="message" style="font-size:13px;color:var(--muted);margin-top:8px">Mensaje</label>
+          <textarea id="message" placeholder="Escribe algo..." required></textarea>
+
+          <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+            <button type="submit" class="cta" style="flex:1">Enviar (demo)</button>
+            <div class="kbd" title="Atajo">Ctrl + Enter</div>
+          </div>
+        </form>
+
+      </section>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="small">
+          <div class="mutecard card">
+            <strong>Personaliza rápido</strong>
+            <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6">
+              <li>Cambia las variables en <code>:root</code>.</li>
+              <li>Modifica la palabra del logo (IJS) por tus iniciales.</li>
+            </ul>
+          </div>
+
+          <div class="card mutecard">
+            <strong>Atajos</strong>
+            <p style="margin-top:8px">Presiona <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> para enviar el formulario.</p>
+          </div>
+
+          <div class="card mutecard" id="infoBox">
+            <strong>Información</strong>
+            <p style="margin-top:8px;color:var(--muted)">Estado: listo. Abre esta página localmente o súbela a tu hosting.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> IJS Demo</div>
+      <div>Hecho con <span style="color:var(--accent)">❤</span> · <a class="link" href="#" onclick="themeTip()">Personalizar</a></div>
+    </footer>
+  </div>
+
+  <!-- Script pequeño -->
+  <script>
+    // Rellenar año
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Enviar demo (no hace POST real)
+    function fauxSend(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      if(!name || !msg) return alert('Completa nombre y mensaje.');
+      // Mostrar mini-resumen en sidebar
+      const info = document.getElementById('infoBox');
+      info.innerHTML = '<strong>Mensaje recibido (demo)</strong><p style="margin-top:8px;color:var(--muted)">De: '+escapeHtml(name)+'<br>Texto: '+escapeHtml(msg).slice(0,120)+'...</p>';
+      // limpiar
+      document.getElementById('contactForm').reset();
+      return false;
+    }
+
+    // Atajo Ctrl+Enter -> enviar
+    document.addEventListener('keydown', function(e){
+      if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+        document.querySelector('#contactForm button[type="submit"]').click();
+      }
+    });
+
+    // pequeña función de escape
+    function escapeHtml(s){ return s.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+
+    // consejo para personalizar
+    function themeTip(){
+      alert('Para cambiar colores edita las variables en :root (CSS). Por ejemplo --accent y --bg.');
+    }
+  </script>
+</body>
+</html> 
